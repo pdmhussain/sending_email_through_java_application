@@ -1,0 +1,32 @@
+package com.jsp.user_management_backend.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.jsp.user_management_backend.Service.UserService;
+import com.jsp.user_management_backend.dto.User;
+import com.jsp.user_management_backend.util.ResponseStructure;
+import com.jsp.user_management_backend.util.UserConfig;
+
+public class UserController {
+	@Autowired
+	UserConfig config;
+	@Autowired
+	UserService service;
+	@PostMapping("/save")
+	public ResponseEntity<ResponseStructure> saveUser(@RequestBody User user) {
+		sendMsg(user.getEmail());
+		return service.saveUser(user);
+	}
+	public String sendMsg(String email) {
+		try {
+			config.sendEmail(email);
+			return "sent successfully";
+		}catch(Exception e) {
+			return "Internal error";
+		}
+	}
+
+}

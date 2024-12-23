@@ -1,0 +1,5 @@
+package com.jsp.user_management_backend.dao;
+
+public class UserDao {
+
+}

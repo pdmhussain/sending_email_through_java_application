@@ -1,0 +1,19 @@
+package com.jsp.user_management_backend.dao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.jsp.user_management_backend.Repository.UserRepository;
+import com.jsp.user_management_backend.dto.User;
+
+@Repository
+public class UserDao {
+	
+	@Autowired
+	UserRepository repository;
+	
+	public User saveUser(User user) {
+		return repository.save(user);
+	}
+
+}

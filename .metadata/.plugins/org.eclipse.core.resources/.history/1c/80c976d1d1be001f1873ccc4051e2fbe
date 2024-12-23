@@ -1,0 +1,39 @@
+package com.jsp.user_management_backend.Service;
+
+import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.jsp.user_management_backend.dao.UserDao;
+import com.jsp.user_management_backend.dto.User;
+import com.jsp.user_management_backend.util.ResponseStructure;
+
+@Service
+public class UserService {
+	
+	@Autowired
+	UserDao dao;
+	
+	public ResponseEntity<ResponseStructure> saveUser(User user){
+		ResponseStructure structure=ResponseStructure.builder().msg("User management data stored successfully")
+																.status(HttpStatus.CREATED.value())
+																.data(dao.saveUser(user))
+																.dateTime(LocalDateTime.now())
+																.build();
+		return new ResponseEntity<ResponseStructure>(structure,HttpStatus.CREATED);
+	}
+	
+	public ResponseEntity<ResponseStructure> userLogin(String Email,String password)
+	{
+		ResponseStructure structure=ResponseStructure.builder().msg("User data is found successfully")
+																.status(HttpStatus.FOUND.value())
+												                .data(dao.userLogin(Email, password))
+												               .dateTime(LocalDateTime.now())
+												               .build();
+        return new ResponseEntity<ResponseStructure>(structure,HttpStatus.FOUND);
+	}
+
+}

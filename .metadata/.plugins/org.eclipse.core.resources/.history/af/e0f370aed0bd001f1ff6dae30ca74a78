@@ -1,0 +1,5 @@
+package com.jsp.user_management_backend.util;
+
+public class ResponseStructure {
+
+}

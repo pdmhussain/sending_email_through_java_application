@@ -1,0 +1,9 @@
+package com.jsp.user_management_backend.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.jsp.user_management_backend.dto.User;
+
+public interface UserRepository extends JpaRepository<User, Integer>{
+
+}
