@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body
+        {
+            text-align: center;
+            background-color: lightgreen;
+            margin-top: 10vw;
+            font-size: 2vw;
+        }
+        input{
+            margin-top: 2vw;
+            font-size: 2vw;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="form" method="post">
+        Email: <input type="text" name="email" id="email"><br>
+        Password: <input type="password" name="pwd" id="pwd"><br>
+        <input type="submit" value="Login"><br>
+    </form>
+    <script>
+        document
+        .getElementById("form")
+        .addEventListener("submit",async function (event) {
+            event.preventDefault();
+            
+            const user={
+                
+                email:document.getElementById("email").value,
+                password:document.getElementById("pwd").value,
+            };
+            try {
+                let response=await fetch(`http://localhost:8083/user/login?email=${user.email}&pwd=${user.password}`,{
+                    method:"GET"
+
+                });
+                if(response.status==302){
+                    alert("data found successfully")
+                    window.location.href="signin.html"
+                }
+                else if(response.status==404){
+                    alert("check your email or password")
+                    window.location.href="login.html"
+
+                }
+                
+            } catch (error) {
+                console.log(error);
+                
+            }
+        });
+    </script>
+</body>
+</html>
